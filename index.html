@@ -22,7 +22,7 @@
         body {
             font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
             line-height: 1.45;
-            padding: 28px;
+            padding: 20px;
             background: linear-gradient(180deg, #f3f6ff 0%, #f6fbf8 100%);
             color: #0f1724
         }
@@ -34,27 +34,23 @@
             padding: 22px;
             border-radius: 14px;
             box-shadow: 0 12px 40px rgba(8, 30, 63, 0.08);
-            transform: translateY(0);
-            animation: fadeInUp .5s ease both
         }
 
         h1 {
             font-size: 22px;
             margin: 0 0 6px;
             color: var(--accent-2);
-            animation: fadeInDown .6s ease both
         }
 
         p.lead {
             color: var(--muted);
             margin-top: 0;
-            animation: fadeInDown .7s ease both
         }
 
         form .row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px
+            gap: 12px;
         }
 
         label {
@@ -74,7 +70,6 @@
             border-radius: 10px;
             font-size: 14px;
             background: linear-gradient(180deg, #fff, #fbfdff);
-            transition: transform .15s ease, box-shadow .15s ease
         }
 
         input:focus,
@@ -108,7 +103,6 @@
             border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(15, 98, 254, 0.12);
-            transition: transform .12s ease, box-shadow .12s ease
         }
 
         button:hover {
@@ -137,7 +131,6 @@
             padding: 14px;
             border-radius: 10px;
             background: linear-gradient(180deg, #fbfdff, #ffffff);
-            animation: fadeInUp .5s ease both
         }
 
         #sig-pad {
@@ -145,7 +138,6 @@
             border-radius: 8px;
             background: linear-gradient(180deg, #fff, #fcfdff);
             box-shadow: 0 6px 18px rgba(12, 22, 60, 0.04);
-            animation: fadeInUp .6s ease both
         }
 
         .controls {
@@ -161,24 +153,8 @@
             color: var(--muted)
         }
 
-        @media(min-width:900px) {
-            .layout {
-                display: grid;
-                grid-template-columns: 1fr 460px;
-                gap: 18px
-            }
-
-            .preview-wrapper {
-                height: 100%;
-                overflow: auto;
-                border-left: 1px solid #f0f3fb;
-                padding-left: 20px
-            }
-
-            .preview {
-                position: relative;
-                animation: slideInLeft .45s ease both
-            }
+        .preview-wrapper {
+            margin-top: 20px;
         }
 
         .preview {
@@ -199,70 +175,26 @@
             background: linear-gradient(90deg, #e9f0ff, #f5e9ff);
             color: var(--accent);
             font-weight: 600;
-            animation: fadeIn .8s ease both
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(12px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0)
-            }
-        }
-
-        @keyframes pulseAccent {
-            0% {
-                box-shadow: 0 8px 20px rgba(15, 98, 254, 0.08)
-            }
-
-            50% {
-                box-shadow: 0 18px 40px rgba(15, 98, 254, 0.12)
-            }
-
-            100% {
-                box-shadow: 0 8px 20px rgba(15, 98, 254, 0.08)
-            }
-        }
-
-        button#generate {
-            animation: pulseAccent 3.6s ease-in-out infinite
         }
 
         @media(max-width:720px) {
             form .row {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr !important;
             }
 
-            .preview-wrapper {
-                display: none
+            .actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            #sig-pad {
+                width: 100% !important;
+                height: 120px !important;
             }
         }
     </style>
@@ -273,107 +205,96 @@
         <h1>EverestEcom — Student Agreement</h1>
         <p class="lead">Fill the form and click <strong>Generate PDF</strong> to download the signed student agreement.</p>
 
-        <div class="layout">
-            <div>
-                <form id="agreementForm">
-                    <div class="row">
-                        <div>
-                            <label>Full Name</label>
-                            <input required id="name" type="text" placeholder="Student full name" />
-                        </div>
-                        <div>
-                            <label>Email</label>
-                            <input required id="email" type="email" placeholder="student@example.com" />
-                        </div>
-                        <div>
-                            <label>Phone</label>
-                            <input id="phone" type="tel" placeholder="0300-1234567" />
-                        </div>
-                        <div>
-                            <label>Course / Package (select one or more)</label>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-                                <label><input class="course-checkbox" type="checkbox" value="Shopify" /> Shopify</label>
-                                <label><input class="course-checkbox" type="checkbox" value="TikTokShop" /> TikTokShop</label>
-                                <label><input class="course-checkbox" type="checkbox" value="eBay" /> eBay</label>
-                                <label><input class="course-checkbox" type="checkbox" value="Amazon" /> Amazon</label>
-                                <label><input class="course-checkbox" type="checkbox" value="Walmart" /> Walmart</label>
-                                <label><input class="course-checkbox" type="checkbox" value="Digital Marketing" /> Digital Marketing</label>
-                                <label style="grid-column:1/-1"><input id="course_other_chk" class="course-checkbox"
-                                        type="checkbox" value="Other" /> Other: <input id="course_other_text"
-                                        type="text" placeholder="If Other, write here"
-                                        style="width:60%;margin-left:8px" /></label>
-                            </div>
-                        </div>
-                        <div>
-                            <label>Start Date</label>
-                            <input id="start_date" type="date" />
-                        </div>
-                        <div>
-                            <label>Fee (PKR)</label>
-                            <input id="fee" type="text" placeholder="60000" />
-                        </div>
-                        <div class="full">
-                            <label>Additional Notes (optional)</label>
-                            <textarea id="notes" placeholder="Anything extra to include in contract..."></textarea>
-                        </div>
-                        <div class="full agreement-box">
-                            <strong>Agreement Preview (editable below)</strong>
-                            <p id="agreementText" contenteditable="true"
-                                style="margin:8px 0;padding:6px;border-radius:6px;background:#fff">This agreement
-                                confirms that <strong>[Student Name]</strong> enrolls in the selected course with
-                                EverestEcom. The student agrees to pay the fee and follow rules. Refund and attendance
-                                policies apply as discussed.</p>
-                        </div>
-                        <div class="full">
-                            <label>Signature (draw below)</label>
-                            <canvas id="sig-pad" width="600" height="120"></canvas>
-                            <div class="controls">
-                                <button type="button" id="clearSig" class="btn-ghost">Clear</button>
-                                <div class="muted">Draw with mouse or finger</div>
-                            </div>
-                        </div>
-                        <div class="full">
-                            <label>Upload ID (optional)</label>
-                            <input id="idfile" type="file" accept="image/*,application/pdf" />
-                        </div>
-                        <div class="full">
-                            <label><input id="agreeCheckbox" type="checkbox" /> I accept the terms and conditions of
-                                this Student Agreement.</label>
-                        </div>
+        <form id="agreementForm">
+            <div class="row">
+                <div>
+                    <label>Full Name</label>
+                    <input required id="name" type="text" placeholder="Student full name" />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input required id="email" type="email" placeholder="student@example.com" />
+                </div>
+                <div>
+                    <label>Phone</label>
+                    <input id="phone" type="tel" placeholder="0300-1234567" />
+                </div>
+                <div class="full">
+                    <label>Course / Package (select one or more)</label>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                        <label><input class="course-checkbox" type="checkbox" value="Shopify" /> Shopify</label>
+                        <label><input class="course-checkbox" type="checkbox" value="TikTokShop" /> TikTokShop</label>
+                        <label><input class="course-checkbox" type="checkbox" value="eBay" /> eBay</label>
+                        <label><input class="course-checkbox" type="checkbox" value="Amazon" /> Amazon</label>
+                        <label><input class="course-checkbox" type="checkbox" value="Walmart" /> Walmart</label>
+                        <label><input class="course-checkbox" type="checkbox" value="Digital Marketing" /> Digital Marketing</label>
+                        <label style="grid-column:1/-1"><input id="course_other_chk" class="course-checkbox" type="checkbox" value="Other" /> Other: <input id="course_other_text" type="text" placeholder="If Other, write here" style="width:60%;margin-left:8px" /></label>
                     </div>
-                    <div class="actions">
-                        <button id="generate">Generate PDF</button>
-                        <button id="saveLocal" type="button" class="btn-ghost">Save (local)</button>
-                        <button id="downloadJson" type="button" class="btn-ghost">Download JSON</button>
-                        <div style="margin-left:auto" class="muted">Saved locally in browser or download PDF</div>
+                </div>
+                <div>
+                    <label>Start Date</label>
+                    <input id="start_date" type="date" />
+                </div>
+                <div>
+                    <label>Fee (PKR)</label>
+                    <input id="fee" type="text" placeholder="60000" />
+                </div>
+                <div class="full">
+                    <label>Additional Notes (optional)</label>
+                    <textarea id="notes" placeholder="Anything extra to include in contract..."></textarea>
+                </div>
+                <div class="full agreement-box">
+                    <strong>Agreement Preview (editable below)</strong>
+                    <p id="agreementText" contenteditable="true" style="margin:8px 0;padding:6px;border-radius:6px;background:#fff">This agreement confirms that <strong>[Student Name]</strong> enrolls in the selected course with EverestEcom. The student agrees to pay the fee and follow rules. Refund and attendance policies apply as discussed.</p>
+                </div>
+                <div class="full">
+                    <label>Signature (draw below)</label>
+                    <canvas id="sig-pad" width="600" height="120"></canvas>
+                    <div class="controls">
+                        <button type="button" id="clearSig" class="btn-ghost">Clear</button>
+                        <div class="muted">Draw with mouse or finger</div>
                     </div>
-                </form>
+                </div>
+                <div class="full">
+                    <label>Upload ID (optional)</label>
+                    <input id="idfile" type="file" accept="image/*,application/pdf" />
+                </div>
+                <div class="full">
+                    <label><input id="agreeCheckbox" type="checkbox" /> I accept the terms and conditions of this Student Agreement.</label>
+                </div>
             </div>
-            <div class="preview-wrapper">
-                <div class="preview" id="pdfContent">
-                    <h2 style="margin-top:0">Student Agreement</h2>
-                    <div id="previewBody">
-                        <p><strong>Student:</strong> <span id="p_name">—</span></p>
-                        <p><strong>Email:</strong> <span id="p_email">—</span></p>
-                        <p><strong>Phone:</strong> <span id="p_phone">—</span></p>
-                        <p><strong>Course:</strong> <span id="p_course">—</span></p>
-                        <p><strong>Start Date:</strong> <span id="p_date">—</span></p>
-                        <p><strong>Fee:</strong> <span id="p_fee">—</span></p>
-                        <hr />
-                        <div id="p_agreement"></div>
-                        <div style="margin-top:12px">
-                            <div><strong>Signature:</strong></div>
-                            <div id="p_signature"></div>
-                        </div>
-                        <hr />
-                        <p class="muted">Agreement generated by EverestEcom</p>
+            <div class="actions">
+                <button id="generate">Generate PDF</button>
+                <button id="saveLocal" type="button" class="btn-ghost">Save (local)</button>
+                <button id="downloadJson" type="button" class="btn-ghost">Download JSON</button>
+            </div>
+        </form>
+
+        <div class="preview-wrapper">
+            <div class="preview" id="pdfContent">
+                <h2 style="margin-top:0">Student Agreement</h2>
+                <div id="previewBody">
+                    <p><strong>Student:</strong> <span id="p_name">—</span></p>
+                    <p><strong>Email:</strong> <span id="p_email">—</span></p>
+                    <p><strong>Phone:</strong> <span id="p_phone">—</span></p>
+                    <p><strong>Course:</strong> <span id="p_course">—</span></p>
+                    <p><strong>Start Date:</strong> <span id="p_date">—</span></p>
+                    <p><strong>Fee:</strong> <span id="p_fee">—</span></p>
+                    <hr />
+                    <div id="p_agreement"></div>
+                    <div style="margin-top:12px">
+                        <div><strong>Signature:</strong></div>
+                        <div id="p_signature"></div>
                     </div>
+                    <hr />
+                    <p class="muted">Agreement generated by EverestEcom</p>
                 </div>
             </div>
         </div>
-        <footer>Open <strong>index.html</strong> in any browser. For server saving (email/DB), I can add a POST
-            endpoint.</footer>
+
+        <footer>Open <strong>index.html</strong> in any browser. For server saving (email/DB), I can add a POST endpoint.</footer>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script>
@@ -399,9 +320,20 @@
         };
         const canvas = document.getElementById('sig-pad');
         const sigPad = new SignaturePad(canvas, { backgroundColor: 'rgba(255,255,255,0)', penColor: 'black' });
+
         document.getElementById('clearSig').addEventListener('click', () => sigPad.clear());
-        function resizeCanvas() { const ratio = Math.max(window.devicePixelRatio || 1, 1); canvas.width = canvas.offsetWidth * ratio; canvas.height = 120 * ratio; canvas.getContext('2d').scale(ratio, ratio); sigPad.clear(); }
-        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+        function resizeCanvas() {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = 120 * ratio;
+            canvas.getContext('2d').scale(ratio, ratio);
+            sigPad.clear();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
         function updatePreview() {
             preview.name.textContent = nameIn.value || '—';
             preview.email.textContent = emailIn.value || '—';
@@ -411,15 +343,80 @@
             preview.date.textContent = dateIn.value || '—';
             preview.fee.textContent = feeIn.value ? 'PKR ' + feeIn.value : '—';
             preview.agreement.innerHTML = agreementText.innerHTML.replace(/\[Student Name\]/g, nameIn.value || '[Student Name]') + (notesIn.value ? '<p><strong>Notes:</strong>' + notesIn.value + '</p>' : '');
-            if (!sigPad.isEmpty()) { const dataURL = sigPad.toDataURL(); preview.signature.innerHTML = '<img style="max-width:260px;border:1px solid #eee;padding:6px;border-radius:6px" src="' + dataURL + '" />'; } else preview.signature.innerHTML = '<div class="muted">(No signature)</div>';
+            if (!sigPad.isEmpty()) {
+                const dataURL = sigPad.toDataURL();
+                preview.signature.innerHTML = '<img style="max-width:260px;border:1px solid #eee;padding:6px;border-radius:6px" src="' + dataURL + '" />';
+            } else preview.signature.innerHTML = '<div class="muted">(No signature)</div>';
         }
-        ['input', 'change'].forEach(ev => { nameIn.addEventListener(ev, updatePreview); emailIn.addEventListener(ev, updatePreview); phoneIn.addEventListener(ev, updatePreview); dateIn.addEventListener(ev, updatePreview); feeIn.addEventListener(ev, updatePreview); notesIn.addEventListener(ev, updatePreview); agreementText.addEventListener('input', updatePreview); courseChecks.forEach(ch => ch.addEventListener('change', updatePreview)); courseOtherText.addEventListener('input', updatePreview); });
-        function collectData() { return { name: nameIn.value, email: emailIn.value, phone: phoneIn.value, course: Array.from(courseChecks).filter(c => c.checked).map(c => c.value === 'Other' ? (courseOtherText.value || 'Other') : c.value), start_date: dateIn.value, fee: feeIn.value, notes: notesIn.value, agreement_html: agreementText.innerHTML, signature_dataURL: sigPad.isEmpty() ? null : sigPad.toDataURL(), created_at: new Date().toISOString() } };
-        function saveToLocal() { localStorage.setItem('kamranStudent_' + (new Date().toISOString()), JSON.stringify(collectData())); }
-        document.getElementById('saveLocal').addEventListener('click', e => { e.preventDefault(); saveToLocal(); alert('Saved locally in browser (localStorage).'); });
-        document.getElementById('downloadJson').addEventListener('click', e => { e.preventDefault(); const data = collectData(); const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = (data.name || 'student') + '_kamran_agreement.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); });
-        document.getElementById('generate').addEventListener('click', e => { e.preventDefault(); if (!document.getElementById('agreeCheckbox').checked) { alert('Please accept the agreement checkbox.'); return } updatePreview(); const element = document.getElementById('pdfContent'); html2pdf().set({ margin: 10, filename: (nameIn.value || 'student') + '_KamranEcom_Agreement.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } }).from(element).save(); saveToLocal(); });
-        form.addEventListener('submit', ev => ev.preventDefault()); updatePreview();
+
+        ['input', 'change'].forEach(ev => {
+            nameIn.addEventListener(ev, updatePreview);
+            emailIn.addEventListener(ev, updatePreview);
+            phoneIn.addEventListener(ev, updatePreview);
+            dateIn.addEventListener(ev, updatePreview);
+            feeIn.addEventListener(ev, updatePreview);
+            notesIn.addEventListener(ev, updatePreview);
+            agreementText.addEventListener('input', updatePreview);
+            courseChecks.forEach(ch => ch.addEventListener('change', updatePreview));
+            courseOtherText.addEventListener('input', updatePreview);
+        });
+
+        function collectData() {
+            return {
+                name: nameIn.value,
+                email: emailIn.value,
+                phone: phoneIn.value,
+                course: Array.from(courseChecks).filter(c => c.checked).map(c => c.value === 'Other' ? (courseOtherText.value || 'Other') : c.value),
+                start_date: dateIn.value,
+                fee: feeIn.value,
+                notes: notesIn.value,
+                agreement_html: agreementText.innerHTML,
+                signature_dataURL: sigPad.isEmpty() ? null : sigPad.toDataURL(),
+                created_at: new Date().toISOString()
+            };
+        }
+
+        function saveToLocal() {
+            localStorage.setItem('kamranStudent_' + (new Date().toISOString()), JSON.stringify(collectData()));
+        }
+
+        document.getElementById('saveLocal').addEventListener('click', e => {
+            e.preventDefault();
+            saveToLocal();
+            alert('Saved locally in browser (localStorage).');
+        });
+
+        document.getElementById('downloadJson').addEventListener('click', e => {
+            e.preventDefault();
+            const data = collectData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (data.name || 'student') + '_kamran_agreement.json';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('generate').addEventListener('click', e => {
+            e.preventDefault();
+            if (!document.getElementById('agreeCheckbox').checked) { alert('Please accept the agreement checkbox.'); return }
+            updatePreview();
+            const element = document.getElementById('pdfContent');
+            html2pdf().set({
+                margin: 10,
+                filename: (nameIn.value || 'student') + '_KamranEcom_Agreement.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).from(element).save();
+            saveToLocal();
+        });
+
+        form.addEventListener('submit', ev => ev.preventDefault());
+        updatePreview();
     </script>
 </body>
 
